@@ -35,7 +35,7 @@ Menu --> Settings --> Device Info
 
 Key in the Serial Number field
 
-<img src="images/serial.png" width="300"/>
+<img src="images/serial.png" width="400"/>
 
 ### Activation Bytes
 
