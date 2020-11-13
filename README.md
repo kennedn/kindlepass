@@ -1,7 +1,7 @@
 # KindleActivator
 Older Kindle models, (1, 2, DX, 3 ...) require that a license file (AudibleActivation.sys) be present on the device to allow the playback of audible content. 
 
-As it stands, the Audible/Amazon login flow has changed so much that these old devices can no longer log in and retrive this license by themselves.
+As it stands, the Audible/Amazon login flow has changed so much that these old devices can no longer log in and retrieve this license by themselves.
 
 KindleActivator is designed to streamline the retrieval of licenses for these devices.
 
@@ -16,11 +16,11 @@ KindleActivator is designed to streamline the retrieval of licenses for these de
 ### Prerequisites
 - Python >=3.6
   
-Run pip install from within the project directory to install dependancies:
+Run pip install from within the project directory to install dependencies:
 ```bash
 python3 -m pip install .
 ```
-This should install all required dependancies, after which the script can be ran:
+This should install all required dependencies, after which the script can be ran:
 ```bash
 python3 kindle_activator.py
 ```
