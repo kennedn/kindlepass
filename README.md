@@ -29,10 +29,13 @@ python3 kindle_activator.py
 The tool will walk through a Wizard. If one or more Kindles are detected then the only requirement
 from the user is to follow the prompts to login to their Audible account to retrieve activation.
 
-If Auto-detection fails then the user will be asked to input their devices serial number manually,
-this can be found by Navigating to Menu --> Settings --> Device Info and keying in the displayed serial number:
+#### Serial
+If prompted, you can find your Devices serial by Navigating to
+Menu --> Settings --> Device Info
 
-[]()
+Key in the Serial Number field
+
+<img src="images/serial.png" width="300"/>
 
 ### Activation Bytes
 
@@ -46,7 +49,7 @@ mpv --demuxer-lavf-o=activation_bytes=XXXXXXXX audiobook.aax
 
 Decode to MP3:
 ```bash
-ffmpeg -activation_bytes XXXXXXXX -i audiobook.aax -o audiobook.mp3
+ffmpeg -activation_bytes XXXXXXXX -i audiobook.aax audiobook.mp3
 ```
 
 ### Notes
