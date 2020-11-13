@@ -1,8 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import os
 from tempfile import mkstemp
 import struct
-import Audible.src.audible as audible
+import audible
 import httpx
 import subprocess as shell
 from datetime import datetime
@@ -139,7 +139,7 @@ def login():
         if auth.expires > datetime.now().timestamp():
             return auth
     if DEBUG > 1:
-        from creds import *
+        from creds import user, password, locale
     else:
         user = choice("Username: ")
         password = choice("Password: ", secret=True)
@@ -275,7 +275,7 @@ if __name__ == "__main__":
             if user_location != "":
                 location = user_location
             if kindle.save(location):
-                input(f"Saved to {location}.\nThis file can now be placed manually under KINDLEROOT:/system/AudibleActivation.sys")
+                input(f"Saved to {location}.\n\nThis file can now be placed manually under KINDLEROOT:/system/AudibleActivation.sys")
         elif prompt == "print":
             input(f"Activation Bytes: {kindle.bytes}")
             print()

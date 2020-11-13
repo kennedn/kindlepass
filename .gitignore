@@ -1,1 +1,4 @@
 creds.py
+__pycache__
+.auth.token
+*/AudibleActivation.sys
