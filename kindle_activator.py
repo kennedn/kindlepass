@@ -278,7 +278,7 @@ def prompt_user(object_list: list, menu_data: dict) -> object:
 
 
 if __name__ == "__main__":
-    DEBUG = 2
+    DEBUG = 0
     kindle = []
     # Run auto detect if we are on linux (using udev)
     if platform == "linux" or platform == "linux2":
