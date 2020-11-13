@@ -25,20 +25,18 @@ This should install all required dependancies, after which the script can be ran
 python3 kindle_activator.py
 ```
 ### Usage
-
 The tool will walk through a Wizard. If one or more Kindles are detected then the only requirement
 from the user is to follow the prompts to login to their Audible account to retrieve activation.
 
 #### Serial
 If prompted, you can find your Devices serial by Navigating to
-Menu --> Settings --> Device Info
+Menu --> Settings --> Device Info --> Serial Number:
 
-Key in the Serial Number field
-
-<img src="images/serial.png" width="400"/>
+On Device             	                         | kindle_activator.py
+:-----------------------------------------------:|:-----------------------------------------------:
+<img src="images/serial_device.png" width="400"/>|<img src="images/serial_script.png" width="400"/>
 
 ### Activation Bytes
-
 After Activation has occured you can also `Print activation bytes`. 
 These bytes can be used to play .aax files natively or remove DRM entirely, example commands:
 
@@ -53,5 +51,4 @@ ffmpeg -activation_bytes XXXXXXXX -i audiobook.aax audiobook.mp3
 ```
 
 ### Notes
-
 Kindle auto-detection will not function on Windows and Mac OS systems.
