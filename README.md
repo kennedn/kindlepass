@@ -3,7 +3,7 @@ Older Kindle models, (1, 2, DX, 3 ...) require that a license file (AudibleActiv
 
 As it stands, the Audible/Amazon login flow has changed so much that these old devices can no longer log in and retrive this license by themselves.
 
-KindleActivator is designed to streamline the retrieval of licenses for legacy Kindles.
+KindleActivator is designed to streamline the retrieval of licenses for these devices.
 
 ## Features
 - Auto-detection of plugged-in Kindles within Linux
