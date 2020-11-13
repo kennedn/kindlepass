@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 import os
-from tempfile import mkstemp
 import struct
-import audible
-import httpx
 import subprocess as shell
+import audible_kennedn as audible
+import httpx
 from getpass import getpass
+from tempfile import mkstemp
 from sys import platform
 
 
@@ -278,7 +278,7 @@ def prompt_user(object_list: list, menu_data: dict) -> object:
 
 
 if __name__ == "__main__":
-    DEBUG = 0
+    DEBUG = 2
     kindle = []
     # Run auto detect if we are on linux (using udev)
     if platform == "linux" or platform == "linux2":
@@ -320,7 +320,7 @@ if __name__ == "__main__":
         # Build menu objects list for each desired action
         selection_menu = []
 
-        selection_menu.append(MenuItem('activate', "Activate device (Will require login to Audible)", ))
+        selection_menu.append(MenuItem('activate', "Activate device (Will require login to Amazon)", ))
         if kindle.is_mounted and kindle.is_activated:
             selection_menu.append(MenuItem('device', "Save to Device", ))
         if kindle.is_activated:
