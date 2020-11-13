@@ -4,8 +4,8 @@ from sys import platform
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-install_requires = ["httpx==0.14.*", 
-                    "audible_kennedn @ git+https://github.com/kennedn/Audible#egg=audible_kennedn-0.5dev0"]
+install_requires = ["httpx==0.14.*",
+                    "audible_kennedn @ https://github.com/kennedn/Audible/tarball/master#egg=audible_kennedn-0.5dev0"]
 if platform == "linux" or platform == "linux2":
     install_requires.extend(("pyudev", "psutil"))
 
