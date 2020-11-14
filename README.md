@@ -1,9 +1,9 @@
 # kindlepass
-Older Kindle models, (1, 2, DX, 3 ...) require that a license file be present on the device to allow the playback of audible content. 
+Audible devices/apps require that a license file be present to allow the playback of audible content.
 
-As it stands, the Audible/Amazon login flow has changed so much that these old devices can no longer log in and retrieve this license by themselves.
+As it stands, the Audible/Amazon login flow has changed so much that older Kindle models, (1, 2, DX, 3 ...) can no longer log in and retrieve this license by themselves.
 
-**kindlepass** is designed to streamline the retrieval of licenses for these devicesfrom audible servers.
+**kindlepass** is designed to streamline the retrieval of licenses for these devices.
 
 ## Features
 - Windows / Mac OS / Linux Support
