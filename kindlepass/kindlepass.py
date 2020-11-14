@@ -346,7 +346,7 @@ def main(args=None):
             input("Saved to device! Audible content should now play without an activation prompt")
         elif prompt == "save":
             """ Save to location, providing hints for next steps """
-            path = f"{os.getenv('HOME')}/.kindlepass/{kindle.serial}"
+            path = f"{os.expanduser('~')}/.kindlepass/{kindle.serial}"
             location = f"{path}/AudibleActivation.sys"
             if not os.path.exists(path):
                 os.makedirs(path)
