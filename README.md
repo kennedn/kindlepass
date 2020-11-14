@@ -3,12 +3,13 @@ Older Kindle models, (1, 2, DX, 3 ...) require that a license file be present on
 
 As it stands, the Audible/Amazon login flow has changed so much that these old devices can no longer log in and retrieve this license by themselves.
 
-**kindlepass** is designed to streamline the retrieval of licenses for these devices.
+**kindlepass** is designed to streamline the retrieval of licenses for these devicesfrom audible servers.
 
 ## Features
-- Auto-detection of plugged-in Kindles within Linux
+- Windows / Mac OS / Linux Support
+- Auto-detection of plugged-in Kindles on Linux
 - Full CLI wizard
-- Install directly to device
+- Install licenses directly to device
 - Generate activation bytes, allowing native playback and drm removal.
 
 ## How to run
