@@ -83,17 +83,24 @@ class Kindle:
 
     def __local_activate(self):
         # Sanity check that local activation exists and is the right size
-        if self.is_mounted and self.remote_file_exists and os.stat(self.filepath).st_size == 0x237:
+        if self.is_mounted and self.remote_file_exists and os.stat(self.filepath).st_size == 0x230:
             with open(self.filepath, 'rb') as activation:
                 a = activation.read()
             # Further sanity check, make sure our serial number appears in the activation
             if (a.find(self.serial.encode())):
                 self.activation = a
 
+    @staticmethod
+    def __clean(activation):
+        """ Strips newline characters from activation body """
+        fmt = "70s1x" * 8  # 8 slots of 70 bytes with 1 pad byte in between
+        # Returns a list of each
+        return b''.join(struct.unpack(fmt, activation))
+
     def activate(self, auth):
         # Audible returns activation that contains metadata, extracting 0x237 bytes
         # from the end discards this metadata.
-        self.activation = auth.get_activation(self.serial)[-0x237:]
+        self.activation = self.__clean(auth.get_activation(self.serial)[-0x238:])
 
     def save(self, location=None):
         # Save Activation bytes to device or passed location
