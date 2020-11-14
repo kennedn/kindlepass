@@ -132,9 +132,9 @@ class Kindle:
 
     @property
     def bytes(self):
-        # Unpack first 4 bytes of activation and swap endiness to produce activation bytes
+        # Unpack first 4 bytes of activation in little-endian order to produce activation bytes
         if self.is_activated:
-            return struct.pack('>I', struct.unpack('<I', self.activation[:4])[0]).hex()
+            return "{:x}".format(*struct.unpack("<I", self.activation[:4]))
         else:
             return None
 
@@ -346,15 +346,15 @@ if __name__ == "__main__":
             input("Saved to device! Audible content should now play without an activation prompt")
         elif prompt == "save":
             """ Save to location, providing hints for next steps """
-            path = f"{os.path.dirname(os.path.realpath(__file__))}/{kindle.serial}"
+            path = f"{os.getenv('HOME')}/.kindlepass/{kindle.serial}"
             location = f"{path}/AudibleActivation.sys"
             if not os.path.exists(path):
                 os.makedirs(path)
-            user_location = input(f"Enter Location (Default ./{kindle.serial}/AudibleActivation.sys): ")
+            user_location = input(f"Enter Location (Default ~/.kindlepass/{kindle.serial}/AudibleActivation.sys): ")
             if user_location != "":
                 location = user_location
             if kindle.save(location):
-                input(f"Saved to {location}.\n\nThis file can now be placed manually under KINDLEROOT:/system/AudibleActivation.sys")
+                input(f"Saved to {location}.\n\nThis file can now be placed manually under KINDLE:/system/AudibleActivation.sys")
         elif prompt == "print":
             """ Print activation bytes """
             input(f"Activation Bytes: {kindle.bytes}")

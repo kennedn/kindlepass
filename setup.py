@@ -10,14 +10,14 @@ if platform == "linux" or platform == "linux2":
     install_requires.extend(("pyudev", "psutil"))
 
 setuptools.setup(
-    name="KindleAuthenticator-kennedn",
+    name="kindlepass",
     version="0.1",
     author="kennedn",
     author_email="kennedn@msn.com",
     description="Helps older Kindle models continue to use the Audible service",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/kennedn/KindleActivator",
+    url="https://github.com/kennedn/kindlepass",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -25,5 +25,6 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     install_requires=install_requires,
+    scripts=['bin/kindlepass'],
     python_requires='>=3.6',
 )
