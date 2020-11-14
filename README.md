@@ -3,7 +3,7 @@ Older Kindle models, (1, 2, DX, 3 ...) require that a license file be present on
 
 As it stands, the Audible/Amazon login flow has changed so much that these old devices can no longer log in and retrieve this license by themselves.
 
-*kindlepass* is designed to streamline the retrieval of licenses for these devices.
+**kindlepass** is designed to streamline the retrieval of licenses for these devices.
 
 ## Features
 - Auto-detection of plugged-in Kindles within Linux
@@ -33,9 +33,9 @@ from the user is to follow the prompts to login to their Audible account to retr
 If prompted, you can find your Devices serial by Navigating to
 Menu --> Settings --> Device Info --> Serial Number:
 
-On Device             	                         | kindle_activator.py
+kindle_activator.py                              | On Device             	                         
 :-----------------------------------------------:|:-----------------------------------------------:
-<img src="images/serial_device.png" width="400"/>|<img src="images/serial_script.png" width="400"/>
+<img src="images/serial_script.png" width="400"/>|<img src="images/serial_device.png" width="400"/>
 
 ### Activation Bytes
 After Activation has occured you can also `Print activation bytes`. 
