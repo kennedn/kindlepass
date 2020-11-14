@@ -1,29 +1,30 @@
-# KindleActivator
-Older Kindle models, (1, 2, DX, 3 ...) require that a license file (AudibleActivation.sys) be present on the device to allow the playback of audible content. 
+# kindlepass
+Older Kindle models, (1, 2, DX, 3 ...) require that a license file be present on the device to allow the playback of audible content. 
 
 As it stands, the Audible/Amazon login flow has changed so much that these old devices can no longer log in and retrieve this license by themselves.
 
-KindleActivator is designed to streamline the retrieval of licenses for these devices.
+*kindlepass* is designed to streamline the retrieval of licenses for these devices.
 
 ## Features
 - Auto-detection of plugged-in Kindles within Linux
 - Full CLI wizard
 - Install directly to device
-- Able to print activation bytes, allowing audio extraction with ffmpeg.
+- Generate activation bytes, allowing native playback and drm removal.
 
 ## How to run
 
 ### Prerequisites
 - Python >=3.6
   
-Run pip install from within the project directory to install dependencies:
+Run pip install from within the project directory to install kindlepass and dependancies:
 ```bash
 python3 -m pip install .
 ```
-This should install all required dependencies, after which the script can be ran:
+Then run the wizard:
 ```bash
-python3 kindle_activator.py
+kindlepass
 ```
+
 ### Usage
 The tool will walk through a Wizard. If one or more Kindles are detected then the only requirement
 from the user is to follow the prompts to login to their Audible account to retrieve activation.

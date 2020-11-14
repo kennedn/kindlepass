@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import os
 import struct
 import subprocess as shell
@@ -132,9 +131,9 @@ class Kindle:
 
     @property
     def bytes(self):
-        # Unpack first 4 bytes of activation and swap endiness to produce activation bytes
+        # Unpack first 4 bytes of activation in little-endian order to produce activation bytes
         if self.is_activated:
-            return struct.pack('>I', struct.unpack('<I', self.activation[:4])[0]).hex()
+            return "{:x}".format(*struct.unpack("<I", self.activation[:4]))
         else:
             return None
 
@@ -277,11 +276,14 @@ def prompt_user(object_list: list, menu_data: dict) -> object:
     return selected_object
 
 
-if __name__ == "__main__":
+def main(args=None):
+    global DEBUG
     DEBUG = 0
     kindle = []
     # Run auto detect if we are on linux (using udev)
-    if platform == "linux" or platform == "linux2":
+    if DEBUG >= 2:
+        kindle.append(Kindle("B001XXXXXXXXXXXX", "__fake_kindle__"))
+    elif platform == "linux" or platform == "linux2":
         kindle = auto_detect()
 
     # Build simple menu for kindle display
@@ -346,11 +348,11 @@ if __name__ == "__main__":
             input("Saved to device! Audible content should now play without an activation prompt")
         elif prompt == "save":
             """ Save to location, providing hints for next steps """
-            path = f"{os.path.dirname(os.path.realpath(__file__))}/{kindle.serial}"
+            path = f"{os.path.expanduser('~')}/.kindlepass/{kindle.serial}"
             location = f"{path}/AudibleActivation.sys"
             if not os.path.exists(path):
                 os.makedirs(path)
-            user_location = input(f"Enter Location (Default ./{kindle.serial}/AudibleActivation.sys): ")
+            user_location = input(f"Enter Location (Default ~/.kindlepass/{kindle.serial}/AudibleActivation.sys): ")
             if user_location != "":
                 location = user_location
             if kindle.save(location):
@@ -359,3 +361,8 @@ if __name__ == "__main__":
             """ Print activation bytes """
             input(f"Activation Bytes: {kindle.bytes}")
             print()
+
+
+if __name__ == "__main__":
+    DEBUG = 0
+    main()
