@@ -33,7 +33,7 @@ from the user is to follow the prompts to login to their Audible account to retr
 If prompted, you can find your Devices serial by Navigating to
 Menu --> Settings --> Device Info --> Serial Number:
 
-kindle_activator.py                              | On Device             	                         
+kindlepass                                       | On Device             	                         
 :-----------------------------------------------:|:-----------------------------------------------:
 <img src="images/serial_script.png" width="400"/>|<img src="images/serial_device.png" width="400"/>
 
