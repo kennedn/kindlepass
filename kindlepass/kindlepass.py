@@ -281,7 +281,9 @@ def main(args=None):
     DEBUG = 0
     kindle = []
     # Run auto detect if we are on linux (using udev)
-    if platform == "linux" or platform == "linux2":
+    if DEBUG >= 2:
+        kindle.append(Kindle("B001XXXXXXXXXXXX", "__fake_kindle__"))
+    elif platform == "linux" or platform == "linux2":
         kindle = auto_detect()
 
     # Build simple menu for kindle display
@@ -346,7 +348,7 @@ def main(args=None):
             input("Saved to device! Audible content should now play without an activation prompt")
         elif prompt == "save":
             """ Save to location, providing hints for next steps """
-            path = f"{os.expanduser('~')}/.kindlepass/{kindle.serial}"
+            path = f"{os.path.expanduser('~')}/.kindlepass/{kindle.serial}"
             location = f"{path}/AudibleActivation.sys"
             if not os.path.exists(path):
                 os.makedirs(path)
