@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import os
 import struct
 import subprocess as shell
@@ -277,7 +276,8 @@ def prompt_user(object_list: list, menu_data: dict) -> object:
     return selected_object
 
 
-if __name__ == "__main__":
+def main(args=None):
+    global DEBUG
     DEBUG = 0
     kindle = []
     # Run auto detect if we are on linux (using udev)
@@ -354,8 +354,13 @@ if __name__ == "__main__":
             if user_location != "":
                 location = user_location
             if kindle.save(location):
-                input(f"Saved to {location}.\n\nThis file can now be placed manually under KINDLE:/system/AudibleActivation.sys")
+                input(f"Saved to {location}.\n\nThis file can now be placed manually under KINDLEROOT:/system/AudibleActivation.sys")
         elif prompt == "print":
             """ Print activation bytes """
             input(f"Activation Bytes: {kindle.bytes}")
             print()
+
+
+if __name__ == "__main__":
+    DEBUG = 0
+    main()

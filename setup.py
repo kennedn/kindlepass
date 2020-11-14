@@ -18,13 +18,17 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/kennedn/kindlepass",
-    packages=setuptools.find_packages(),
+    packages=["kindlepass"],
+    entry_points={
+        "console_scripts": [
+            "kindlepass = kindlepass.kindlepass:main",
+        ]
+    },
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
     install_requires=install_requires,
-    scripts=['bin/kindlepass'],
     python_requires='>=3.6',
 )
