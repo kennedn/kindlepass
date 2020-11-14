@@ -33,6 +33,8 @@ class Kindle:
     methods:
     __local_activate():
         Attempt to retrieve activation from device
+    __clean():
+        Remove newlines from activation body
     activate():
         Request activation from Audible servers
     save(location=None):
@@ -94,11 +96,11 @@ class Kindle:
     def __clean(activation):
         """ Strips newline characters from activation body """
         fmt = "70s1x" * 8  # 8 slots of 70 bytes with 1 pad byte in between
-        # Returns a list of each
+        # Unpack returns a list of slots, join to reform activation byte object
         return b''.join(struct.unpack(fmt, activation))
 
     def activate(self, auth):
-        # Audible returns activation that contains metadata, extracting 0x237 bytes
+        # Audible returns activation that contains metadata, extracting 0x238 bytes
         # from the end discards this metadata.
         self.activation = self.__clean(auth.get_activation(self.serial)[-0x238:])
 
@@ -303,7 +305,7 @@ def main(args=None):
         """ Create a dummy Kindle object from a provided serial if none were auto-detected """
         prompt = choice("No Kindles Detected.\nEnter Serial Number manually? (y/n) ", ["y", "n"])
         if prompt == "y":
-            print("Serial Number can be obtained from Settings --> Device Info --> Serial Number on device.\n")
+            print("Refer to https://github.com/kennedn/kindlepass#serial for assistance.\n")
             valid_serial = None
             while valid_serial is None:
                 serial = input("Enter Serial Number: ").replace(" ", "").upper()
@@ -348,11 +350,11 @@ def main(args=None):
                 if prompt == 'n':
                     continue
             kindle.activate(login())
-            input("Kindle activated successfully (remember to save it).")
+            input("Retrieved Audible activation.\n")
         elif prompt == "device":
             """ Save to Device """
             kindle.save()
-            input("Saved to device! Audible content should now play without an activation prompt")
+            input("Saved to device.\n")
         elif prompt == "save":
             """ Save to location, providing hints for next steps """
             path = f"{os.path.expanduser('~')}/.kindlepass/{kindle.serial}"
@@ -363,7 +365,7 @@ def main(args=None):
             if user_location != "":
                 location = user_location
             if kindle.save(location):
-                input(f"Saved to {location}.\n\nThis file can now be placed manually under KINDLEROOT:/system/AudibleActivation.sys")
+                input(f"Saved to {location}.\nRefer to https://github.com/kennedn/kindlepass#save-to-file for next steps.\n")
         elif prompt == "print":
             """ Print activation bytes """
             input(f"Activation Bytes: {kindle.bytes}")
