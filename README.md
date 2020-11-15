@@ -10,7 +10,7 @@ As it stands, the Audible/Amazon login flow has changed so much that older Kindl
 - Auto-detection of plugged-in Kindles on Linux
 - Full CLI wizard
 - Install licenses directly to device
-- Generate activation bytes, allowing native playback and drm removal.
+- Generate activation bytes, allowing native playback and conversions
 
 ## How to run
 
@@ -58,7 +58,7 @@ This option will allow you to save the `AudibleActivation.sys` file to a specifi
 manually on the Kindle device at `ROOT:/system/AudibleActivation.sys`.
 
 #### Print activation bytes
-Activation bytes can be used to play .aax files natively or remove DRM entirely, example commands:
+Activation bytes can be used to play .aax files natively or convert to other formats, example commands:
 
 Play Natively:
 ```bash
