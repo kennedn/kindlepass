@@ -16,8 +16,11 @@ As it stands, the Audible/Amazon login flow has changed so much that older Kindl
 
 ### Prerequisites
 - Python >=3.6
+
+Download this project by either running `git clone git@github.com:kennedn/kindlepass.git`
+or downloading the tarball [here](https://github.com/kennedn/kindlepass/archive/master.zip).
   
-Run pip install from within the project directory to install kindlepass and dependancies:
+You can then run pip install from within the project directory to install kindlepass and dependancies:
 ```bash
 python3 -m pip install .
 ```
