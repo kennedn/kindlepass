@@ -6,7 +6,7 @@ As it stands, the Audible/Amazon login flow has changed so much that older Kindl
 **kindlepass** is designed to streamline the retrieval of licenses for these devices.
 
 ## Features
-- Windows / Mac OS / Linux Support
+- Windows / Linux Support
 - Auto-detection of plugged-in Kindles on Linux
 - Full CLI wizard
 - Install licenses directly to device
