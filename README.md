@@ -10,7 +10,7 @@ As it stands, the Audible/Amazon login flow has changed so much that older Kindl
 - Auto-detection of plugged-in Kindles on Linux
 - Full CLI wizard
 - Install licenses directly to device
-- Generate activation bytes, allowing native playback and conversions
+- Generate activation bytes, allowing native playback
 
 ## How to run
 
@@ -64,8 +64,7 @@ Play Natively:
 ```bash
 mpv --demuxer-lavf-o=activation_bytes=XXXXXXXX audiobook.aax
 ```
-
-Decode to MP3:
+Convert to MP3:
 ```bash
 ffmpeg -activation_bytes XXXXXXXX -i audiobook.aax audiobook.mp3
 ```
