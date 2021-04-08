@@ -5,6 +5,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 install_requires = ["httpx==0.14.*",
+                    "pillow>=8.0.*",
                     "audible_kennedn @ https://github.com/kennedn/Audible/tarball/master#egg=audible_kennedn-0.5dev0"]
 if platform == "linux" or platform == "linux2":
     install_requires.extend(("pyudev", "psutil"))
