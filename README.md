@@ -69,5 +69,13 @@ Convert to MP3:
 ffmpeg -activation_bytes XXXXXXXX -i audiobook.aax audiobook.mp3
 ```
 
-### Notes
+### Transferring Audiobooks
+
+There is no direct way to obtain audiobooks from audible on older kindles. You must instead download and then transfer the .aax files to your kindle manually following these steps:
+
+- Navigate to your audible library, [here](https://www.audible.co.uk/library/titles).
+- Download the relevant titles in .aax format
+- Plug-in and transfer the files to your Kindle under `ROOT:/audible/`. Create this folder if required.
+
+### Additional Notes
 Kindle auto-detection will not function on Windows and Mac OS systems.
