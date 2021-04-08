@@ -153,19 +153,19 @@ class Kindle:
 
 def custom_captcha_callback(captcha_url: str) -> str:
     """Opens captcha image with eog, or default webbrowser as fallback"""
-    captcha = httpx.get(captcha_url).content
     try:
-        if (platform == "linux" or platform == "linux2") and shell.check_output(["which", "eog"]):
-            fd, path = mkstemp()
-            with os.fdopen(fd, 'wb') as file:
-                file.write(captcha)
-            shell.Popen(["eog", path])
-            val = input("Enter Captcha: ")
-            os.remove(path)
-    except shell.CalledProcessError:
+        captcha = httpx.get(captcha_url).content
+        fd, path = mkstemp()
+        with os.fdopen(fd, 'wb') as file:
+            file.write(captcha)
+        shell.Popen(["eog", path])
+        val = input("Enter Captcha: ")
+    except FileNotFoundError:
         import webbrowser
         webbrowser.open(captcha_url)
         val = input("Enter Captcha: ")
+    finally:
+        os.remove(path)
     return val
 
 
