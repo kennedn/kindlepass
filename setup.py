@@ -11,19 +11,14 @@ if platform == "linux" or platform == "linux2":
 
 setuptools.setup(
     name="kindlepass",
-    version="0.1",
+    version="0.2",
     author="kennedn",
     author_email="kennedn@msn.com",
     description="Helps older Kindle models continue to use the Audible service",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/kennedn/kindlepass",
-    packages=["kindlepass"],
-    entry_points={
-        "console_scripts": [
-            "kindlepass = kindlepass.kindlepass:main",
-        ]
-    },
+    url="https://github.com/kennedn/KindleActivator",
+    packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

@@ -118,7 +118,6 @@ class Kindle:
                 token.write(self.activation)
             return True
         except IOError as e:
-            print(f"Couldn't open {location} for writing:\n{e}")
             return False
 
     @property
@@ -155,14 +154,15 @@ class Kindle:
 def custom_captcha_callback(captcha_url: str) -> str:
     """Opens captcha image with eog, or default webbrowser as fallback"""
     captcha = httpx.get(captcha_url).content
-    if (platform == "linux" or platform == "linux2") and shell.check_output(["which", "eog"]):
-        fd, path = mkstemp()
-        with os.fdopen(fd, 'wb') as file:
-            file.write(captcha)
-        shell.Popen(["eog", path])
-        val = input("Enter Captcha: ")
-        os.remove(path)
-    else:
+    try:
+        if (platform == "linux" or platform == "linux2") and shell.check_output(["which", "eog"]):
+            fd, path = mkstemp()
+            with os.fdopen(fd, 'wb') as file:
+                file.write(captcha)
+            shell.Popen(["eog", path])
+            val = input("Enter Captcha: ")
+            os.remove(path)
+    except shell.CalledProcessError:
         import webbrowser
         webbrowser.open(captcha_url)
         val = input("Enter Captcha: ")
@@ -194,7 +194,7 @@ def login():
     if DEBUG > 1:
         from creds import user, password, locale
     else:
-        user = choice("Username: ")
+        user = choice("Email: ")
         password = choice("Password: ", secret=True)
         locale = choice("Country Code (uk, us, ca, au, fr, de, jp, it, in): ", codes)
 
@@ -212,6 +212,18 @@ def choice(prompt: str, item_list=[], secret=False) -> str:
         while ret is None or ret == "":
             ret = cmd(prompt)
     return ret
+
+
+class Colors:
+    WARN = '\u001b[33m'
+    OK   = '\u001b[32m'
+    FAIL = '\u001b[31m'
+    ENDC = '\u001b[0m'
+    BOLD = '\u001b[1m'
+
+
+def colored_print(color, text):
+    print(f'{Colors.BOLD}{color}{text}{Colors.ENDC}')
 
 
 def align_table(table: list) -> list:
@@ -303,9 +315,10 @@ def main(args=None):
 
     if len(kindle) == 0:
         """ Create a dummy Kindle object from a provided serial if none were auto-detected """
-        prompt = choice("No Kindles Detected.\nEnter Serial Number manually? (y/n) ", ["y", "n"])
+        colored_print(Colors.WARN, "No Kindles Detected.")
+        prompt = choice("Enter Serial Number manually? (y/n) ", ["y", "n"])
         if prompt == "y":
-            print("Refer to https://github.com/kennedn/kindlepass#serial for assistance.\n")
+            colored_print(Colors.WARN, "Refer to https://github.com/kennedn/kindlepass#serial for assistance.\n")
             valid_serial = None
             while valid_serial is None:
                 serial = input("Enter Serial Number: ").replace(" ", "").upper()
@@ -314,15 +327,20 @@ def main(args=None):
             kindle = Kindle(valid_serial)
         else:
             exit(1)
-    elif len(kindle) > 1:
-        """ Prompt user to select desired kindle object if more than one auto-detected """
-        print("Found multiple Kindles, please select:")
-        kindle = prompt_user(kindle, kindle_menu)
+    elif len(kindle) >= 1:
+        print(f"{Colors.OK}", end="")
+        if len(kindle) > 1:
+            """ Prompt user to select desired kindle object if more than one auto-detected """
+            print("Found multiple Kindles, please select:")
+            kindle = prompt_user(kindle, kindle_menu)
+        else:
+            print("Found Kindle:")
+            generate_menu(kindle, kindle_menu)
+            kindle = kindle[0]
+        print(f"{Colors.ENDC}", end="")
     elif len(kindle) == 1:
         """ If only one device auto-detected then just use as is with no further prompts """
-        print("Found Kindle:")
-        generate_menu(kindle, kindle_menu)
-        kindle = kindle[0]
+
     print()
 
     """ Main menu loop """
@@ -345,16 +363,19 @@ def main(args=None):
         if prompt == "activate":
             """ Attempt to activate kindle """
             if kindle.is_activated:
-                prompt = choice("Kindle appears to be activated.\nDo you want to ask audible for a new activation? (y/n) ",
+                prompt = choice(f"\n{Colors.BOLD}{Colors.WARN}Kindle already appears to be activated.\nDo you want to ask audible for a new activation? (y/n) {Colors.ENDC}",
                                 ["y", "n"])
                 if prompt == 'n':
                     continue
             kindle.activate(login())
-            input("Retrieved Audible activation.\n")
+            colored_print(Colors.OK, "\nRetrieved Audible activation.\n")
         elif prompt == "device":
             """ Save to Device """
-            kindle.save()
-            input("Saved to device.\n")
+            if kindle.save():
+                colored_print(Colors.OK, "\nSaved to device.\n")
+            else:
+                colored_print(Colors.FAIL, "\nCouldn't open kindle for writing.\n")
+
         elif prompt == "save":
             """ Save to location, providing hints for next steps """
             path = f"{os.path.expanduser('~')}/.kindlepass/{kindle.serial}"
@@ -364,12 +385,15 @@ def main(args=None):
             user_location = input(f"Enter Location (Default ~/.kindlepass/{kindle.serial}/AudibleActivation.sys): ")
             if user_location != "":
                 location = user_location
+
             if kindle.save(location):
-                input(f"Saved to {location}.\nRefer to https://github.com/kennedn/kindlepass#save-to-file for next steps.\n")
+                colored_print(Colors.OK, f"\nSaved to {location}.")
+                colored_print(Colors.WARN, "Refer to https://github.com/kennedn/kindlepass#save-to-file for next steps.\n")
+            else:
+                colored_print(Colors.FAIL, f"\nCouldn't open {location} for writing.\n")
         elif prompt == "print":
             """ Print activation bytes """
-            input(f"Activation Bytes: {kindle.bytes}")
-            print()
+            colored_print(Colors.OK, f"\nActivation Bytes: {kindle.bytes}\n")
 
 
 if __name__ == "__main__":
