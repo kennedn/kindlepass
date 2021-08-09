@@ -28,6 +28,11 @@ Then run the wizard:
 ```bash
 kindlepass
 ```
+If you encounter errors you may need to install some user level packages to resolve dependancies:
+```bash
+python3 -m pip -U Pillow psutil
+```
+
 ### Serial
 If prompted, you can find your Devices serial by Navigating to
 Menu --> Settings --> Device Info --> Serial Number:
