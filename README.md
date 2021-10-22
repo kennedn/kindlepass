@@ -71,7 +71,7 @@ mpv --demuxer-lavf-o=activation_bytes=XXXXXXXX audiobook.aax
 ```
 Convert to MP3:
 ```bash
-ffmpeg -activation_bytes XXXXXXXX -i audiobook.aax audiobook.mp3
+ffmpeg -activation_bytes XXXXXXXX -i audiobook.aax -c copy audiobook.m4b
 ```
 
 ### Transferring Audiobooks
