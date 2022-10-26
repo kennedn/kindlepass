@@ -69,7 +69,7 @@ Play Natively:
 ```bash
 mpv --demuxer-lavf-o=activation_bytes=XXXXXXXX audiobook.aax
 ```
-Convert to MP3:
+Convert to MP4:
 ```bash
 ffmpeg -activation_bytes XXXXXXXX -i audiobook.aax -c copy audiobook.m4b
 ```
