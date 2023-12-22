@@ -30,7 +30,7 @@ kindlepass
 ```
 If you encounter errors you may need to install some user level packages to resolve dependancies:
 ```bash
-python3 -m pip -U Pillow psutil
+python3 -m pip install -U Pillow psutil
 ```
 
 ### Serial
